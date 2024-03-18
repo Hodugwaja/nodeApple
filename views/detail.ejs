@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+<body class="grey-bg">
+    <%- include('nav.ejs') %> 
+    <form class="form-box" action="/insertWrite" method="post"><!--주석만 달아보자!-->
+        <h4>글쓰기</h4>
+        <input type="text" name="title">
+        <input type="text" name="content">
+        <button type="submit">전송</button><!--look like  -->
+    </form>
+  </body>
+</html>
+
+<!-- -의 경우 HTML 태그 사용시 HTML로 적용이 안 됨 -->
+<!-- =의 경우 HTML 태그 사용시 HTML로 적용이 됨 -->

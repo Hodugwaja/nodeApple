@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+<body class="grey-bg">
+    <%- include('nav.ejs') %> 
+    <h4>사용자 글 목록</h4>
+    <div class="white-bg">
+        <% for(var i=0; i<posts.length; i++){%>
+            <div class="list-box">
+                <h4><%= posts[i].title %></h4>
+                <p><%= posts[i].content %></p>
+              </div>
+        <% } %>
+    </div> 
+  </body>
+</html>
+
+<!-- -의 경우 HTML 태그 사용시 HTML로 적용이 됨 -->
+<!-- =의 경우 HTML 태그 사용시 HTML로 적용이 됨 -->
