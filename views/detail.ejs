@@ -8,12 +8,11 @@
 </head>
 <body class="grey-bg">
     <%- include('nav.ejs') %> 
-    <form class="form-box" action="/insertWrite" method="post"><!--주석만 달아보자!-->
-        <h4>글쓰기</h4>
-        <input type="text" name="title">
-        <input type="text" name="content">
-        <button type="submit">전송</button><!--look like  -->
-    </form>
+    <div class="detail-bg">
+        <!-- JSON.stringify 깨진 object 정렬해주기 가-->
+        <h4><%= JSON.stringify(result.title) %></h4>
+        <p><%= JSON.stringify(result.content) %></p>
+    </div> 
   </body>
 </html>
 

@@ -10,7 +10,7 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-const { MongoClient } = require('mongodb')
+const { MongoClient, ObjectId } = require('mongodb')
 
 
 let time = new Date();
@@ -51,7 +51,7 @@ app.get('/send', (request, respond) => {
 })
 
 app.get('/list', async (request, respond) => {
-    // post 라는 곳에 접속해서 document를 array 형태로 가져오기
+    // post 라는 곳에 접속해서 모든 document를 array 형태로 가져오기
     // await은 다 가져올때까지 기다리라는 말
     var list = [];
     let result = await db.collection('post').find().toArray()
@@ -83,8 +83,17 @@ app.post('/insertWrite', async (request, respond) => {
     }
 }) 
 
-app.get('/detail/:aaaa', (request, respond) => {
-    respond.send('쇼핑몰');
+app.get('/detail/:value', async (request, respond) => {
+
+    //지정된 데이터만 가져옴
+    // object 형식으로 보낸 후 맞는 값을 가져옴
+    // new ObjectID 넣어야하라 때 (ObjectId)를 DB에 넣어야함
+    // result.params안에 id값 넣음
+    let result = await db.collection('post').findOne({_id : new ObjectId(request.params.value)});
+    
+    console.log(result);
+
+    respond.render('detail.ejs', {time : time, result: result});
 }) 
 
 
