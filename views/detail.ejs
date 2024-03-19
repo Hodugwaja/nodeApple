@@ -7,12 +7,17 @@
     <link href="/main.css" rel="stylesheet">
 </head>
 <body class="grey-bg">
-    <%- include('nav.ejs') %> 
-    <div class="detail-bg">
-        <!-- JSON.stringify 깨진 object 정렬해주기 가-->
-        <h4><%= JSON.stringify(result.title) %></h4>
-        <p><%= JSON.stringify(result.content) %></p>
-    </div> 
+    <%- include('nav.ejs') %>
+    <form class="form-box" action="/delete" method="post">
+        <div class="detail-bg">
+            <input type="hidden" name="id" value="<%- result._id %>"/>
+            <!-- JSON.stringify 깨진 object 정렬해주기 가-->
+            <h4><%= JSON.stringify(result.title) %></h4>
+            <p><%= JSON.stringify(result.content) %></p>
+            <a href="/update/<%- result._id%>">수정</a>
+            <button type="submit">삭제</button>
+        </div>
+    </form>
   </body>
 </html>
 

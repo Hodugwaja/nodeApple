@@ -60,6 +60,13 @@ body {
     border-radius: 5px;
   }
 
+  .form-box a {
+    padding: 10px;
+    border : none;
+    background : lightgrey;
+    border-radius: 5px;
+  }
+
   .detail-bg {
     background: white;
     padding: 15px;

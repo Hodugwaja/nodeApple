@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"><!--스팸 ㅁ-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+<body class="grey-bg">
+    <%- include('nav.ejs') %> 
+    <form class="form-box" action="/updateWrite" method="post">
+        <h4>글 수정</h4>
+        <input type="text" name="title" value="<%- result.title %>">
+        <input type="text" name="content" value="<%- result.content %>">
+        <button type="submit">수정</button><!--look like  -->
+    </form>
+  </body>
+</html>
+
+<!-- -의 경우 HTML 태그 사용시 HTML로 적용이 됨 -->
+<!-- =의 경우 HTML 태그 사용시 HTML로 적용이 됨 -->
