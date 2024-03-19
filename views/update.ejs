@@ -10,6 +10,7 @@
     <%- include('nav.ejs') %> 
     <form class="form-box" action="/updateWrite" method="post">
         <h4>글 수정</h4>
+        <input type="hidden" name="id" value="<%- result._id %>">
         <input type="text" name="title" value="<%- result.title %>">
         <input type="text" name="content" value="<%- result.content %>">
         <button type="submit">수정</button><!--look like  -->

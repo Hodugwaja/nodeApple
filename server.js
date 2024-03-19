@@ -59,7 +59,6 @@ app.get('/list', async (request, respond) => {
     for(var i=0; i<result.length; i++){
         list.push(`${result[i].title} / ${result[i].content}`);
     }
-    console.log(list);
 
     //views 폴더내에 있는 list.ejs 파일 전송
     respond.render('list.ejs', {posts : result, time : time});
@@ -115,11 +114,28 @@ app.get('/update/:value', async (request, respond) => {
     }
 }) 
 
+
+app.post('/updateWrite', async (request, respond) => {
+    console.log(request.body);
+    if(request.body.title != "" && request.body.content != ""){
+        try{
+            // 수정 코드
+            // ${수정할 대상}, ${$set : {수정할 값}}
+            await db.collection('post').updateOne({_id: new ObjectId(request.body.id)}, {$set : {title : request.body.title, content:request.body.content}});
+        }catch(e){
+            respond.status(500).send(e);
+        }
+        respond.redirect("/list");
+    }else{
+        respond.redirect("/write");
+    }
+}) 
+
 app.post('/delete', async (request, respond) => {
     console.log(request.body);
     if(request.body.title != "" && request.body.content != ""){
         try{
-            //삭제기능
+            await db.collection('post').deleteOne({_id: new ObjectId(request.body.id)});
         }catch(e){
             respond.status(500).send(e);
         }
