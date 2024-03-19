@@ -38,7 +38,8 @@ new MongoClient(url).connect().then((client)=>{
 })
 
 app.get('/', (request, respond) => {
-    respond.sendFile(__dirname + '/index.html'); // localhost:8080/에 들어오면 index.html 파일 표시
+    respond.render('index.ejs', {time : time});
+     // localhost:8080/에 들어오면 index.ejs로 랜더링
 })
 
 app.get('/about', (request, respond) => {
@@ -90,6 +91,7 @@ app.get('/detail/:value', async (request, respond) => {
         // object 형식으로 보낸 후 맞는 값을 가져옴
         // new ObjectID 넣어야하라 때 (ObjectId)를 DB에 넣어야함
         // result.params안에 id값 넣음
+        console.log(request.params);
         let result = await db.collection('post').findOne({_id : new ObjectId(request.params.value)});
         console.log(result);
         if(!result){
@@ -101,7 +103,7 @@ app.get('/detail/:value', async (request, respond) => {
     }catch(e){
         respond.status(400).send("잘못된 URL!");
     }
-}) 
+})  
 
 
 app.get('/shop', (request, respond) => {

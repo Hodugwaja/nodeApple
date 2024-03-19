@@ -8,11 +8,11 @@
 </head>
 <body class="grey-bg">
     <%- include('nav.ejs') %> 
-    <h4><a href="/detail/<%=JSON.stringify(posts[i]._id)%>">사용자 글 목록</a></h4>
+    <h4>사용자 글 목록</h4>
     <div class="white-bg">
         <% for(var i=0; i<posts.length; i++){%>
             <div class="list-box">
-                <h4><%= posts[i].title %></h4>
+                <h4><a href='/detail/<%- posts[i]._id %>'><%= posts[i].title %></a></h4>
                 <p><%= posts[i].content %></p>
               </div>
         <% } %>
