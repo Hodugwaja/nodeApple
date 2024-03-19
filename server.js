@@ -86,14 +86,21 @@ app.post('/insertWrite', async (request, respond) => {
 app.get('/detail/:value', async (request, respond) => {
 
     //지정된 데이터만 가져옴
-    // object 형식으로 보낸 후 맞는 값을 가져옴
-    // new ObjectID 넣어야하라 때 (ObjectId)를 DB에 넣어야함
-    // result.params안에 id값 넣음
-    let result = await db.collection('post').findOne({_id : new ObjectId(request.params.value)});
-    
-    console.log(result);
+    try{
+        // object 형식으로 보낸 후 맞는 값을 가져옴
+        // new ObjectID 넣어야하라 때 (ObjectId)를 DB에 넣어야함
+        // result.params안에 id값 넣음
+        let result = await db.collection('post').findOne({_id : new ObjectId(request.params.value)});
+        console.log(result);
+        if(!result){
+            respond.status(400).send("잘못된 URL!");
+        }else{
+            respond.render('detail.ejs', {time : time, result: result});
+        }
 
-    respond.render('detail.ejs', {time : time, result: result});
+    }catch(e){
+        respond.status(400).send("잘못된 URL!");
+    }
 }) 
 
 
