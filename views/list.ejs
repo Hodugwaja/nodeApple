@@ -15,9 +15,16 @@
                 'Content-Type' : 'application/json'
             }
         ,   body : JSON.stringify({id:writingId})
+        }).then((r) => {
+            if(r.status == 200){            
+                document.getElementById("list_"+index).parentNode.removeChild(element);
+            }else{
+                alert(`오류가 나서 삭제를 처리하지 못했습니다\n오류코드 : ${r.status}`);
+            }
+        }).catch((error) => {
+            alert("어디선가 문제가 발생했으니 로그 확인")
+            console.log(error);
         });
-
-        document.getElementById("list_"+index).parentNode.removeChild(element);
     }
 
     //document.querySelectorAll('.delete')[0].addEventListener('click', function(e){
