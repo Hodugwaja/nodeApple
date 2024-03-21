@@ -6,13 +6,38 @@
     <title>Document</title>
     <link href="/main.css" rel="stylesheet">
 </head>
+
+<script>
+    function deleteWriting(writingId, index){
+        fetch('/delete?test=sans', {
+            method: 'POST'
+        ,   headers : {
+                'Content-Type' : 'application/json'
+            }
+        ,   body : JSON.stringify({id:writingId})
+        });
+
+        document.getElementById("list_"+index).parentNode.removeChild(element);
+    }
+
+    //document.querySelectorAll('.delete')[0].addEventListener('click', function(e){
+    //    fetch('/delete?docid=' + e.target.dataset.id, {
+    //       method : 'DELETE',
+    //    })
+    //}) 
+  </script>
+
 <body class="grey-bg">
     <%- include('nav.ejs') %> 
     <h4>사용자 글 목록</h4>
     <div class="white-bg">
         <% for(var i=0; i<posts.length; i++){%>
-            <div class="list-box">
-                <h4><a href='/detail/<%- posts[i]._id %>'><%= posts[i].title %></a><a href="/update/<%- posts[i]._id %>">✏️</a></h4>
+            <div id="list_<%-i%>" class="list-box">
+                <h4>
+                    <a href='/detail/<%- posts[i]._id %>'><%= posts[i].title %></a>
+                    <a href="/update/<%- posts[i]._id %>">✏️</a>
+                    <span onclick="deleteWriting('<%- posts[i]._id %>', '<%-i%>')" data-id="<%- posts[i]._id %>">🗑️</span>
+                </h4>
                 <p><%= posts[i].content %></p>
               </div>
         <% } %>

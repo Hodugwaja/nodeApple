@@ -132,7 +132,7 @@ app.post('/updateWrite', async (request, respond) => {
 }) 
 
 app.post('/delete', async (request, respond) => {
-    console.log(request.body);
+    console.log(request.body, request.query);
     if(request.body.title != "" && request.body.content != ""){
         try{
             await db.collection('post').deleteOne({_id: new ObjectId(request.body.id)});
