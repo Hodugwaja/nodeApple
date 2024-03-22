@@ -51,11 +51,33 @@ app.get('/send', (request, respond) => {
     respond.send('대충 데이터 보냄 ㅅㄱ');
 })
 
+//전체글
 app.get('/list', async (request, respond) => {
     // post 라는 곳에 접속해서 모든 document를 array 형태로 가져오기
     // await은 다 가져올때까지 기다리라는 말
     var list = [];
     let result = await db.collection('post').find().toArray()
+    for(var i=0; i<result.length; i++){
+        list.push(`${result[i].title} / ${result[i].content}`);
+    }
+
+    //views 폴더내에 있는 list.ejs 파일 전송
+    respond.render('list.ejs', {posts : result, time : time});
+})
+
+//pageNation을 통해 글 분류
+app.get('/listPage', async (request, respond) => {
+    console.log(request.query);
+    var list = [];
+    if(!request.query.page){
+        request.query.page = 1;
+    }
+
+    // skip : 시작점 가져오기 / 값이 크면 오래걸릴 수도 있음
+    // limit : 개수 가져오기
+    //let result = await db.collection('post').find({_id : {$gt : request.query.id}}).limit(5).toArray()
+    let result = await db.collection('post').find().skip(request.query.page * 5).limit(5).toArray()
+
     for(var i=0; i<result.length; i++){
         list.push(`${result[i].title} / ${result[i].content}`);
     }
